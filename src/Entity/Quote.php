@@ -25,6 +25,6 @@ class Quote implements iEntity
         return (string) $quote->id;
     }
     public function methods() {
-        
+        echo 'test '.__CLASS__;
     }
 }
