@@ -19,6 +19,14 @@ class TemplateManager
     {
         $APPLICATION_CONTEXT = ApplicationContext::getInstance();
 
+        foreach( $data as $className => $object ){
+            $tmp = ucfirst($data);
+            $check = (isset($object) and $object instanceof $className ? $object : null;
+            
+            print $check;
+  
+        }
+        exit;
         $quote = (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
 
         if ($quote)

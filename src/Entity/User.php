@@ -1,6 +1,6 @@
 <?php
 
-class User
+class User implements iEntity
 {
     public $id;
     public $firstname;
@@ -13,5 +13,9 @@ class User
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;
+    }
+    
+    public function methods() {
+        
     }
 }

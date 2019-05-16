@@ -1,6 +1,5 @@
 <?php
-
-class Destination
+class Destination implements iEntity
 {
     public $id;
     public $countryName;
@@ -14,5 +13,9 @@ class Destination
         $this->countryName = $countryName;
         $this->conjunction = $conjunction;
         $this->computerName = $computerName;
+    }
+    
+    public function methods() {
+        
     }
 }

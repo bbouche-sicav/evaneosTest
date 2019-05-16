@@ -1,6 +1,6 @@
 <?php
 
-class Site
+class Site implements iEntity
 {
     public $id;
     public $url;
@@ -9,5 +9,8 @@ class Site
     {
         $this->id = $id;
         $this->url = $url;
+    }
+    public function methods() {
+       
     }
 }

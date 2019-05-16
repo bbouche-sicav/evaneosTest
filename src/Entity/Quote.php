@@ -1,6 +1,6 @@
 <?php
 
-class Quote
+class Quote implements iEntity
 {
     public $id;
     public $siteId;
@@ -23,5 +23,8 @@ class Quote
     public static function renderText(Quote $quote)
     {
         return (string) $quote->id;
+    }
+    public function methods() {
+        
     }
 }
