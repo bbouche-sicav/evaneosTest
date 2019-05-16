@@ -16,6 +16,6 @@ class Destination implements iEntity
     }
     
     public function methods() {
-        
+        echo 'test '.__CLASS__;
     }
 }

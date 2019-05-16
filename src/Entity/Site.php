@@ -11,6 +11,6 @@ class Site implements iEntity
         $this->url = $url;
     }
     public function methods() {
-       
+       echo 'test '.__CLASS__;
     }
 }

@@ -16,6 +16,6 @@ class User implements iEntity
     }
     
     public function methods() {
-        
+        echo 'test '.__CLASS__;
     }
 }
