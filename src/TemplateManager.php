@@ -17,18 +17,39 @@ class TemplateManager
 
     private function computeText($text, array $data)
     {
+        //var_dump($text);
+        $placeHolder = array();
+        preg_match_all('[[aA-zZ]*:[aA-zZ]*]', $text, $out);
+        foreach( $out as &$dvar ){
+            $dvar[0] = str_replace('[','', $dvar[0]);
+            $dvar[0] = str_replace(']','', $dvar[0]);
+            $tmp = explode(':', $dvar[0]);
+            
+            if( !isset($placeHolder[$tmp[0]]) ){
+                $placeHolder[$tmp[0]] = array();
+            }
+            array_push($placeHolder[$tmp[0]], $tmp[1]);
+        }
+        
         $APPLICATION_CONTEXT = ApplicationContext::getInstance();
 
         foreach( $data as $className => $object ){
-            $tmp = ucfirst($data);
-            $check = (isset($object) and $object instanceof $className ? $object : null;
-            
-            print $check;
-  
+            if( array_key_exists($className, $placeHolder) ){
+            // is_a => replace instanceOf since not possible to past a string variable
+                $check = (isset($object) and is_a($object, ucfirst($className)) )  ? $object : null;
+            // Reflection Class to get properties and replace automaticly placeholder in tpl
+                $reflect = new ReflectionClass($check);
+                $props   = $reflect->getProperties();
+
+                foreach ($props as $prop) {
+                    if( in_array($prop->getName(), $placeHolder[$className]) ){
+                        $elementFromRepository = eval( ucfirst($className).'Repository::getInstance()->getById('.$check.'->'.$prop->getName().')');
+                    }
+                }
+            }
         }
         exit;
-        $quote = (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
-
+        
         if ($quote)
         {
             $_quoteFromRepository = QuoteRepository::getInstance()->getById($quote->id);
